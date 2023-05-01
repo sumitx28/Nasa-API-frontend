@@ -10,7 +10,6 @@ const Main = () => {
     try {
       const url = `${process.env.REACT_APP_BACKEND_URL}/api/image`;
       const { data: res } = await axios.get(url);
-      console.log(res);
       setData(res);
     } catch (error) {
       setError(error);
@@ -40,7 +39,7 @@ const Main = () => {
             <h1>Error fetching the image! Please try again later!!</h1>
           </div>
         ) : (
-          <img src={data.hdurl} alt='Please Wait!!' />
+          <img src={data.hdurl} alt='Please Wait for 5 second or refresh!!' />
         )}
       </div>
     </div>
