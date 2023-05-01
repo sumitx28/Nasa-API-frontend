@@ -2,10 +2,20 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+
+  const responseMessage = (response) => {
+    console.log(response);
+    localStorage.setItem('token', response);
+    window.location = '/';
+  };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -58,6 +68,7 @@ const Login = () => {
             <button type='submit' className={styles.green_btn}>
               Sign In
             </button>
+            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
           </form>
         </div>
         <div className={styles.right}>
